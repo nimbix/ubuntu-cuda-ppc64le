@@ -1,2 +1,2 @@
-# ubuntu-cuda-ppc64el
-Ubuntu base Docker images for POWER8 systems on JARVICE
+# ubuntu-cuda-ppc64le
+Ubuntu base Docker images with CUDA for POWER8 systems on JARVICE
