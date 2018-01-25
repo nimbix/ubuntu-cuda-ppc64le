@@ -21,11 +21,11 @@ ARG CUDA_REPO_DISTVER
 ENV CUDA_REPO_DISTVER ${CUDA_REPO_DISTVER:-1604}
 
 ARG CUDA_REPO_VER
-ENV CUDA_REPO_VER ${CUDA_REPO_VER:-8.0.61-1}
+ENV CUDA_REPO_VER ${CUDA_REPO_VER:-9.1.85-1}
 ARG NVML_REPO_VER
 ENV NVML_REPO_VER ${NVML_REPO_VER:-1.0.0-1}
 ARG NV_DRV_VER
-ENV NV_DRV_VER ${NV_DRV_VER:-361}
+ENV NV_DRV_VER ${NV_DRV_VER:-390}
 
 ENV CUDA_REPO_URL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/cuda-repo-ubuntu${CUDA_REPO_DISTVER}_${CUDA_REPO_VER}_ppc64el.deb
 ENV NVML_REPO_URL http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/nvidia-machine-learning-repo-ubuntu${CUDA_REPO_DISTVER}_${NVML_REPO_VER}_ppc64el.deb
