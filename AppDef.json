@@ -1,5 +1,5 @@
 {
-    "name": "NVIDIA CUDA toolkit %CUDA_REPO_VER%", 
+    "name": "NVIDIA CUDA Toolkit", 
     "description": "Ubuntu Linux ephemeral environment on POWER8 system with NVIDIA CUDA toolkit.", 
     "author": "Nimbix, Inc.", 
     "licensed": true, 

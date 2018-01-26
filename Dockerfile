@@ -48,4 +48,3 @@ RUN apt-get -yf install && apt-get clean && ldconfig -f /usr/lib/nvidia-${NV_DRV
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
 ADD AppDef.json /etc/NAE/AppDef.json
-RUN sed -i -e "s/%CUDA_REPO_VER%/${CUDA_REPO_VER}/" /etc/NAE/AppDef.json
