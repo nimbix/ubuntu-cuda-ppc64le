@@ -43,6 +43,7 @@ ENV NVML_REPO_URL ""
 WORKDIR /tmp
 RUN apt-get download nvidia-${NV_DRV_VER} && dpkg --unpack nvidia-${NV_DRV_VER}*.deb && rm -f nvidia-${NV_DRV_VER}*.deb && rm -f /var/lib/dpkg/info/nvidia-${NV_DRV_VER}*.postinst
 RUN apt-get -yf install && apt-get clean && ldconfig -f /usr/lib/nvidia-${NV_DRV_VER}/ld.so.conf
+RUN echo 'export PATH=$PATH:/usr/local/cuda/bin' >/etc/profile.d/cuda.sh
 
 # for building CUDA code later
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64/stubs
