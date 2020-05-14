@@ -8,15 +8,7 @@
         "Software Development/Software Testing"
     ], 
     "machines": [
-        "np8c0", 
-        "np8c1", 
-        "np8c4", 
-        "np8c8", 
-        "np8g1", 
-        "np8g2", 
-        "np8g4", 
-        "np8gk1", 
-        "np8gk4"
+        "*"
     ], 
     "vault-types": [
         "FILE", 
