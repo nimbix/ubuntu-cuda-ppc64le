@@ -14,6 +14,12 @@ RUN apt-get -y update && \
         https://raw.githubusercontent.com/nimbix/image-common/$GIT_BRANCH/install-nimbix.sh \
         | bash -s -- --image-common-branch $GIT_BRANCH
 
+RUN apt-get -y update && \
+    apt-get -y install curl && \
+    curl -H 'Cache-Control: no-cache' \
+        https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
+        | bash -s --
+
 WORKDIR /tmp
 
 # 1804 == bionic 18.04
@@ -27,12 +33,13 @@ ENV NVML_REPO_VER ${NVML_REPO_VER:-1.0.0-1}
 ARG NV_DRV_VER
 ENV NV_DRV_VER ${NV_DRV_VER:-410}
 
-ENV CUDA_REPO_URL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/cuda-repo-ubuntu${CUDA_REPO_DISTVER}_${CUDA_REPO_VER}_ppc64el.deb
-ENV NVML_REPO_URL http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/nvidia-machine-learning-repo-ubuntu${CUDA_REPO_DISTVER}_${NVML_REPO_VER}_ppc64el.deb
+ENV CUDA_REPO_URL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/cuda-repo-ubuntu${CUDA_REPO_DISTVER}_${CUDA_REPO_VER}_ppc64el.deb
+ENV NVML_REPO_URL https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/nvidia-machine-learning-repo-ubuntu${CUDA_REPO_DISTVER}_${NVML_REPO_VER}_ppc64el.deb
 
 RUN curl -O ${CUDA_REPO_URL} && dpkg --install *.deb && rm -rf *.deb
 RUN curl -O ${NVML_REPO_URL} && dpkg --install *.deb && rm -rf *.deb
-RUN apt-get update && \
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/7fa2af80.pub && \
+    apt-get update && \
     apt-get -y install cuda-toolkit-10-0 libcudnn7-dev && \
     apt-get clean
 
