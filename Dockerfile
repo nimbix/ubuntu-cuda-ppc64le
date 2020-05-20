@@ -1,9 +1,9 @@
-FROM ppc64le/ubuntu:bionic
+FROM ubuntu:bionic
 MAINTAINER Nimbix, Inc.
 
 # Update SERIAL_NUMBER to force rebuild of all layers (don't use cached layers)
 ARG SERIAL_NUMBER
-ENV SERIAL_NUMBER ${SERIAL_NUMBER:-20180125.1418}
+ENV SERIAL_NUMBER ${SERIAL_NUMBER:-20200520.1400}
 
 ARG GIT_BRANCH
 ENV GIT_BRANCH ${GIT_BRANCH:-master}
