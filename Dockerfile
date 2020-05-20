@@ -50,8 +50,13 @@ ENV NVML_REPO_URL ""
 # XXX: this should be okay even if the host driver is rev'd, since the JARVICE
 # runtime actually binds in the host version anyway
 WORKDIR /tmp
-RUN apt-get download nvidia-${NV_DRV_VER} && dpkg --unpack nvidia-${NV_DRV_VER}*.deb && rm -f nvidia-${NV_DRV_VER}*.deb && rm -f /var/lib/dpkg/info/nvidia-${NV_DRV_VER}*.postinst
-RUN apt-get -yf install && apt-get clean && ldconfig -f /usr/lib/nvidia-${NV_DRV_VER}/ld.so.conf
+RUN apt-get download nvidia-headless-${NV_DRV_VER} && \
+    dpkg --unpack nvidia-headless-${NV_DRV_VER}*.deb && \
+    rm -f nvidia-headless-${NV_DRV_VER}*.deb && \
+    rm -f /var/lib/dpkg/info/nvidia-${NV_DRV_VER}*.postinst
+RUN apt-get -yf install && \
+    apt-get clean && \
+    ldconfig -f /usr/lib/nvidia-${NV_DRV_VER}/ld.so.conf
 RUN echo 'export PATH=$PATH:/usr/local/cuda/bin' >/etc/profile.d/cuda.sh
 
 # for building CUDA code later
