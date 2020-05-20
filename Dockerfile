@@ -40,7 +40,7 @@ RUN curl -O ${CUDA_REPO_URL} && dpkg --install *.deb && rm -rf *.deb
 RUN curl -O ${NVML_REPO_URL} && dpkg --install *.deb && rm -rf *.deb
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/7fa2af80.pub && \
     apt-get update && \
-    apt-get -y install cuda-toolkit-10-0 libcudnn7-dev && \
+    apt-get -y install cuda-toolkit-10-0 libcudnn7-dev cuda-samples-10-0 && \
     apt-get clean
 
 ENV CUDA_REPO_URL ""

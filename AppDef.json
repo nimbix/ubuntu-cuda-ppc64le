@@ -1,6 +1,6 @@
 {
-  "name": "NVIDIA CUDA PPCle Toolkit",
-  "description": "Ubuntu Linux ephemeral environment on POWER8/POWER9 system with NVIDIA CUDA toolkit",
+  "name": "Ubuntu with NVIDIA CUDA Toolkit",
+  "description": "Ubuntu Linux ephemeral environment on POWER8/POWER9 system with NVIDIA CUDA toolkit and samples",
   "author": "Nimbix, Inc.",
   "licensed": true,
   "classifications": [
@@ -8,7 +8,7 @@
     "Software Development/Software Testing"
   ],
   "machines": [
-    "np*"
+    "*"
   ],
   "vault-types": [
     "FILE",
