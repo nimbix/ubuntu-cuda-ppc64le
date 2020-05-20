@@ -1,4 +1,4 @@
-FROM ppc64le/ubuntu:xenial
+FROM ppc64le/ubuntu:bionic
 MAINTAINER Nimbix, Inc.
 
 # Update SERIAL_NUMBER to force rebuild of all layers (don't use cached layers)
@@ -16,23 +16,25 @@ RUN apt-get -y update && \
 
 WORKDIR /tmp
 
-# 1604 == xenial
+# 1804 == bionic 18.04
 ARG CUDA_REPO_DISTVER
-ENV CUDA_REPO_DISTVER ${CUDA_REPO_DISTVER:-1604}
+ENV CUDA_REPO_DISTVER ${CUDA_REPO_DISTVER:-1804}
 
 ARG CUDA_REPO_VER
-ENV CUDA_REPO_VER ${CUDA_REPO_VER:-9.1.85-1}
+ENV CUDA_REPO_VER ${CUDA_REPO_VER:-10.0.130-1}
 ARG NVML_REPO_VER
 ENV NVML_REPO_VER ${NVML_REPO_VER:-1.0.0-1}
 ARG NV_DRV_VER
-ENV NV_DRV_VER ${NV_DRV_VER:-361}
+ENV NV_DRV_VER ${NV_DRV_VER:-410}
 
 ENV CUDA_REPO_URL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/cuda-repo-ubuntu${CUDA_REPO_DISTVER}_${CUDA_REPO_VER}_ppc64el.deb
 ENV NVML_REPO_URL http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu${CUDA_REPO_DISTVER}/ppc64el/nvidia-machine-learning-repo-ubuntu${CUDA_REPO_DISTVER}_${NVML_REPO_VER}_ppc64el.deb
 
 RUN curl -O ${CUDA_REPO_URL} && dpkg --install *.deb && rm -rf *.deb
 RUN curl -O ${NVML_REPO_URL} && dpkg --install *.deb && rm -rf *.deb
-RUN apt-get update && apt-get -y install cuda-toolkit-8-0 libcudnn5-dev libcudnn6-dev && apt-get clean
+RUN apt-get update && \
+    apt-get -y install cuda-toolkit-10-0 libcudnn7-dev && \
+    apt-get clean
 
 ENV CUDA_REPO_URL ""
 ENV NVML_REPO_URL ""
@@ -48,4 +50,5 @@ RUN echo 'export PATH=$PATH:/usr/local/cuda/bin' >/etc/profile.d/cuda.sh
 # for building CUDA code later
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64/stubs
 
-ADD AppDef.json /etc/NAE/AppDef.json
+COPY AppDef.json /etc/NAE/AppDef.json
+RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://api.jarvice.com/jarvice/validate
