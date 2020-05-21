@@ -14,12 +14,6 @@ RUN apt-get -y update && \
         https://raw.githubusercontent.com/nimbix/image-common/$GIT_BRANCH/install-nimbix.sh \
         | bash -s -- --image-common-branch $GIT_BRANCH
 
-RUN apt-get -y update && \
-    apt-get -y install curl && \
-    curl -H 'Cache-Control: no-cache' \
-        https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
-        | bash -s --
-
 WORKDIR /tmp
 
 # 1804 == bionic 18.04
